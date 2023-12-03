@@ -1,10 +1,13 @@
 //App.js
 import React, { useState } from "react";
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MovieslistView from "./MovieList";
 import FilterMovie from "./FilterMovie";
 import { DefautlMovies } from "./Movies";
-function App() {
+import MovieDetailsView from "./MovieDetails";
+
+function Home() {
   /* movieslist state take by default the list from Movies file */
   const [movies, setMovies] = useState(DefautlMovies)
   /* 2 state for filtring by title/rating */
@@ -17,10 +20,9 @@ function App() {
   };
   return (
     <div className="App">
-      {/* //first row to display the filtring components  */}
-       <div class="row">
-        <h1><strong>WarnerBros</strong></h1>
-        <br/>
+      <h1>WarnerBros</h1>
+      {/* first row to display the filtring components */}
+      <div class="row">
         <FilterMovie
           setFilterbytitle={setFilterbytitle}
           setFilterbyrating={setFilterbyrating}
@@ -29,15 +31,28 @@ function App() {
         />
       </div>
       <div class="row">
-      
-        {/* // second row to display the movies list  */}
-         <MovieslistView
+        {/* second row to display the movies list */}
+        <MovieslistView
           moviesList={movies}
           titlefilter={filterbytitle}
           ratingfilter={filterbyrating}
         />
-      </div> 
+      </div>
     </div>
+  );
+}
+function App() {
+
+  return (
+    <Router>
+      <Routes>
+        {/* the defautl path (Home component) */}
+        <Route path="/" element={<Home />} />
+
+        {/* the movie details link */}
+        <Route path="/movielist/:movieTitre" element={<MovieDetailsView />} />
+      </Routes>
+    </Router>
   );
 }
 

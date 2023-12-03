@@ -2,6 +2,7 @@
 import React from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Rating from '@mui/material/Rating';
@@ -11,6 +12,7 @@ function MovieCardView(props) {
   const movie = props.movie
   return (
     /* a card to display echt movie variable */
+    <Link style={{ textDecoration: 'none' }} to={`/movielist/${movie.title}`} state={movie} >
     <Card bg="dark" className="movie-card">
       <img src={movie.posterURL} alt="" />
       <Card.Body>
@@ -30,6 +32,7 @@ function MovieCardView(props) {
         </Stack>
       </Card.Footer>
     </Card>
+    </Link>
   );
 }
 
